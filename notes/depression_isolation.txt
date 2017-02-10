@@ -1,0 +1,18 @@
+call 12/29
+
+----
+#friends
+#degree centrality (ego density)
+
+
+--> trajectories & so forth
+
+**
+U-shape -- 2 few or 2 many friends... // separate indegree and outdegree
+TRAJECTORY -- WHY DEPRESSION IS IMPORTANT 
+
+check if i have the data...
+
+
+email jake -- is it going to asa
+

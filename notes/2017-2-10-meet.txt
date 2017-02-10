@@ -1,0 +1,90 @@
+mental distress; a 
+
+
+wave
+
+keepers_r
+
+should always be in there!!
+finish survey and has net variables
+
+tsex_rinal_r
+gender
+
+cms_r
+both parents?
+
+depr_2
+binary--no!
+
+cavgdepr
+linear --- averaged across (with so it includes missing values)
+depression + anxiety (average + anxiety) --- pick out by hand
+
+sum depression to pick out
+## cdep 02 03 04 07 09 / never (0), sometimes(1), often(2)
+
+## others are in anxiety scale
+
+psamesexuc
+proportion same gender / undirected ties
+
+emcavdepruc / alterdistress
+#probably use this -- this is more conservative ---
+
+emcavdepruc_es 
+don't worry about that one
+
+indegc
+#indegree ties 
+
+recipc
+#reciprocal ties
+
+egondenuc
+#density --- out of all connections could be connected ; friends are friends
+
+ertnstvtyc
+#likelihood a fof is a friend of each other
+#alternate measure of transitivity -- a little more specific and networky
+
+boncentuc
+#bonacet centrality -- popular amongst popular people
+
+
+--------------
+what's the hook that makes it special?  
+
+We expect depression and the relationship to change over time --- trajectory and relationship between IV and DV --- this is why we have to use the ALT
+
+---------------
+What is a predictor and what is a control?
+ - degrees
+ - proportion same-sex
+ - alterdep (punting)
+
+boncentuc = 4 and .5 (average .7)
+
+----------------------
+outdeg/indeg are counts --- make binary indicator for maximizing outdeg = 7
+7 blanks --- function of survey instrument and churn... ****
+
+
+###find and don't find...
+1) density (we can try this --- curvilinear; interesting work here); 2) centrality; 
+
+
+###get permission from prosper --- make up something or use jim's embededness measure --- something to deal with or offer as a way to do it
+
+###peer effect and then ties themselves (instead of just a control)...
+
+-------------------
+use wave 4 as a baseline 5 - 8; 5 is wierd because of hs, and 7 and 8 (from a data standpoint)
+
+#####transition variable --- pretty much everyone // newness effect //
+see if school variable changes
+
+8=12
+7=11
+6=10
+5=9
