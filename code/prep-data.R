@@ -96,6 +96,8 @@ calc.vars=c(    'psamesexuc','emcavgdepruc','emcavgdeprmc',
 
 vars = c(admin.vars,demo.vars,interest.vars)
 
+#NOTE: keepers are individuals whith network data 
+#(i.e. selected to the network sampling frame)
 dat1 = dats[[4]] %>% 
   select(one_of(vars)) %>% 
   filter(keepers_r == 1)
