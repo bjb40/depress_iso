@@ -1,0 +1,3 @@
+curvilinear
+piecewise linear
+depression

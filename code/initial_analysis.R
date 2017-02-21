@@ -52,21 +52,31 @@ ggplot(plts, aes(x=dv.distress,y=value,color=variable)) +
 
 ggsave(paste0(imgdir,'bivariate_dv.pdf'))
 
+plts = melt(cleandat %>% select(dv.distress.d,dv.indegc.d,dv.outdegc.d),id='dv.distress.d')
+ggplot(plts, aes(x=dv.distress.d,y=value,color=variable)) + 
+  geom_jitter(alpha=0.15) + geom_smooth() +
+  xlab('Distress') + ylab('Degrees')
+
+ggsave(paste0(imgdir,'bivariate_delta_dv.pdf'))
+
 #indeg & outdeg
 ggplot(cleandat, aes(x=dv.indegc,y=dv.outdegc)) + geom_jitter(alpha=0.15) + geom_smooth()
-
 ggsave(paste0(imgdir,'bivariate_degrees.pdf'))
 
+ggplot(cleandat, aes(x=dv.indegc.d,y=dv.outdegc.d)) + geom_jitter(alpha=0.15) + geom_smooth()
+ggsave(paste0(imgdir,'bivariate_degrees_dv.pdf'))
 
 #obs level associations
 #controlling for sex,grade,treatment,cslun,cms,psamesex,alterdistress,reciprocity
 
-x=cleandat %>% select(f.female,f.white,f.nwaves,grade,
-                      alterdistress,psamesexuc,recipc,freelunch,cms.r)
+x=cleandat %>% select(f.male,f.white,f.nwaves,grade,
+                      alterdistress,psamesexuc,
+                      freelunch,cms.r)
 
-y=cleandat %>% select(dv.distress,dv.indegc,dv.outdegc)
+y=cleandat %>% select(dv.distress,dv.indegc,dv.outdegc,egodenuc)
 
 #options(na.action='na.pass')
+#test curvilinear
 
 sink(paste0(outdir,'lin_mods.txt'))
 
@@ -84,5 +94,7 @@ for(m in 1:ncol(y))
 
 
 #options(na.action='na.omit')
+
+
 
 sink()

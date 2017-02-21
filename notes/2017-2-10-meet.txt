@@ -22,6 +22,7 @@ linear --- averaged across (with so it includes missing values)
 depression + anxiety (average + anxiety) --- pick out by hand
 
 sum depression to pick out
+## include depression
 ## cdep 02 03 04 07 09 / never (0), sometimes(1), often(2)
 
 ## others are in anxiety scale

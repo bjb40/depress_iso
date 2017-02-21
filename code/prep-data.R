@@ -73,9 +73,6 @@ zipread = function(z){
 #load all sas data -- note errors are captured
 dats=zipread(paste0(rawdir,'Final Datasets_10_16.zip'))
 
-#select appropriate df
-dat = dats[[4]]; #rm(dats)
-
 #@@@@@
 #coding variables
 #@@@@@
@@ -94,15 +91,36 @@ calc.vars=c(    'psamesexuc','emcavgdepruc','emcavgdeprmc',
                 'boncentuc','etrnstvtyc','egodenuc',
                 'outdeg','indeg','recip')
 
+#depress calculated below
 
-
-vars = c(admin.vars,demo.vars,interest.vars)
+vars = c(admin.vars,demo.vars,interest.vars,'depress')
 
 #NOTE: keepers are individuals whith network data 
-#(i.e. selected to the network sampling frame)
+#(i.e. selected to the network sampling frame, 
+#and code depression)
+depvars=paste0('cdepr0',c(2:4,7,9))
+
 dat1 = dats[[4]] %>% 
+  mutate(
+    depress = rowMeans(.[,depvars],na.rm=TRUE))
+
+#recodes table
+sink(paste0(outdir,'recodes.txt'))
+
+printhead('Depression Recode')
+  cat('\n First 15 rows:\n')
+  print(dat1[1:15,c(depvars,'depress')])
+  
+  cat('\n\nOne with partial missing:\n')
+  print(
+  dat1[is.na(dat1$cdepr01) & !(is.na(dat1$cdepr02)),c(depvars,'depress')]
+  )
+sink()
+
+dat1 = dat1 %>%
   select(one_of(vars)) %>% 
   filter(keepers_r == 1)
+
 dat2=dats[[5]] %>% 
   select(matches(paste(c(admin.vars,calc.vars),collapse='|'))) 
 
@@ -152,6 +170,8 @@ sink()
 #clear cache
 rm(list=c('dats', 'dat1', 'dat2'))
 
+
+
 #limit to high school only (when depression was measured)
 #f. indicates fixed
 #limit to variables of most interest HERE
@@ -161,7 +181,7 @@ dat = dat %>%
   rename(
     f.id=id,
     f.treat=cond_treat,
-    f.female=tsex_rfinal_r,
+    f.male=tsex_rfinal_r, #male is original
     f.white=cwhtracer_r,
     f.cohort=cohort,
     freelunch=cslun_r,
@@ -170,6 +190,7 @@ dat = dat %>%
     dv.indegc=indegc,
     alterdistress=emcavgdepruc
   ) %>% select(-keepers_r,-wave,-depr_2,-emcavgdeprmc_es,-emcavgdepruc_es,-netdat,-toutdegree)
+
 
 #draw initial observation of time-varying variables
 fobs=dat %>%
