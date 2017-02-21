@@ -1,7 +1,7 @@
 
 
 @@@@@@@@@@@@@@@@
- LM--no cluster or adjustment DV:dv.distress 
+ LM--no cluster or adjustment DV:depress 
 @@@@@@@@@@@@@@@@
 
 
@@ -10,29 +10,35 @@ lm(formula = y[, m] ~ xmat - 1)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--0.8772 -0.2733 -0.1281  0.1845  1.8994 
+-0.7789 -0.2473 -0.1126  0.1110  1.9781 
 
 Coefficients:
-                   Estimate Std. Error t value Pr(>|t|)    
-xmat(Intercept)    0.716163   0.030750  23.290  < 2e-16 ***
-xmatdv.indegc     -0.001044   0.001167  -0.894 0.371161    
-xmatdv.outdegc    -0.010132   0.001353  -7.489 7.16e-14 ***
-xmategodenuc      -0.010469   0.011341  -0.923 0.355953    
-xmatf.female      -0.176125   0.005412 -32.543  < 2e-16 ***
-xmatf.white        0.012778   0.007479   1.709 0.087546 .  
-xmatf.nwaves      -0.024285   0.003020  -8.042 9.19e-16 ***
-xmatgrade         -0.013935   0.002416  -5.768 8.09e-09 ***
-xmatalterdistress  0.287299   0.010604  27.092  < 2e-16 ***
-xmatpsamesexuc    -0.116722   0.012246  -9.531  < 2e-16 ***
-xmatfreelunch      0.024517   0.006714   3.652 0.000261 ***
-xmatcms.r         -0.038330   0.006285  -6.099 1.08e-09 ***
+                     Estimate Std. Error t value Pr(>|t|)    
+xmat(Intercept)     6.684e-01  3.072e-02  21.758  < 2e-16 ***
+xmatdv.indegc       7.744e-03  5.800e-03   1.335   0.1818    
+xmatdv.outdegc     -4.159e-02  9.229e-03  -4.506 6.62e-06 ***
+xmategodenuc        3.537e-02  6.586e-02   0.537   0.5913    
+xmat`dv.indegc^2`  -1.647e-03  1.245e-03  -1.323   0.1859    
+xmat`dv.outdegc^2`  6.763e-03  3.152e-03   2.146   0.0319 *  
+xmat`egodenuc^2`   -1.842e-01  1.875e-01  -0.982   0.3259    
+xmat`dv.indegc^3`   7.478e-05  7.527e-05   0.994   0.3204    
+xmat`dv.outdegc^3` -4.040e-04  2.983e-04  -1.354   0.1756    
+xmat`egodenuc^3`    1.421e-01  1.328e-01   1.070   0.2847    
+xmatf.male         -1.467e-01  5.190e-03 -28.267  < 2e-16 ***
+xmatf.white        -2.731e-03  7.136e-03  -0.383   0.7020    
+xmatf.nwaves       -2.959e-02  2.880e-03 -10.275  < 2e-16 ***
+xmatgrade          -1.585e-02  2.305e-03  -6.875 6.31e-12 ***
+xmatalterdistress   2.577e-01  1.012e-02  25.473  < 2e-16 ***
+xmatpsamesexuc     -9.228e-02  1.169e-02  -7.894 3.04e-15 ***
+xmatfreelunch       2.563e-02  6.407e-03   4.001 6.33e-05 ***
+xmatcms.r          -3.961e-02  5.994e-03  -6.608 3.98e-11 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.4123 on 27011 degrees of freedom
-  (8008 observations deleted due to missingness)
-Multiple R-squared:  0.4709,	Adjusted R-squared:  0.4707 
-F-statistic:  2003 on 12 and 27011 DF,  p-value: < 2.2e-16
+Residual standard error: 0.3932 on 27022 degrees of freedom
+  (7991 observations deleted due to missingness)
+Multiple R-squared:  0.3558,	Adjusted R-squared:  0.3554 
+F-statistic: 829.2 on 18 and 27022 DF,  p-value: < 2.2e-16
 
 
 
@@ -46,29 +52,35 @@ lm(formula = y[, m] ~ xmat - 1)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--5.2910 -1.4924 -0.2259  1.1941 13.2155 
+-5.9842 -1.2734 -0.2069  1.0902 12.5738 
 
 Coefficients:
-                   Estimate Std. Error t value Pr(>|t|)    
-xmat(Intercept)    4.499868   0.159526  28.208  < 2e-16 ***
-xmatdv.distress   -0.028359   0.031710  -0.894  0.37116    
-xmatdv.outdegc     0.303855   0.006812  44.603  < 2e-16 ***
-xmategodenuc       0.657689   0.058969  11.153  < 2e-16 ***
-xmatf.female      -0.244271   0.028715  -8.507  < 2e-16 ***
-xmatf.white        0.244121   0.038952   6.267 3.73e-10 ***
-xmatf.nwaves       0.184117   0.015717  11.715  < 2e-16 ***
-xmatgrade         -0.262302   0.012496 -20.990  < 2e-16 ***
-xmatalterdistress -0.516813   0.055925  -9.241  < 2e-16 ***
-xmatpsamesexuc    -0.197486   0.063920  -3.090  0.00201 ** 
-xmatfreelunch     -0.424082   0.034904 -12.150  < 2e-16 ***
-xmatcms.r          0.158198   0.032763   4.829 1.38e-06 ***
+                     Estimate Std. Error t value Pr(>|t|)    
+xmat(Intercept)      4.639854   0.151604  30.605  < 2e-16 ***
+xmatdepress         -0.017983   0.150664  -0.119 0.904991    
+xmatdv.outdegc      -0.989709   0.046014 -21.509  < 2e-16 ***
+xmategodenuc        15.012748   0.319036  47.057  < 2e-16 ***
+xmat`depress^2`     -0.026774   0.247524  -0.108 0.913865    
+xmat`dv.outdegc^2`   0.267946   0.015813  16.944  < 2e-16 ***
+xmat`egodenuc^2`   -34.421101   0.926297 -37.160  < 2e-16 ***
+xmat`depress^3`      0.010837   0.096907   0.112 0.910961    
+xmat`dv.outdegc^3`  -0.015866   0.001503 -10.559  < 2e-16 ***
+xmat`egodenuc^3`    19.604870   0.663108  29.565  < 2e-16 ***
+xmatf.male          -0.294807   0.026864 -10.974  < 2e-16 ***
+xmatf.white          0.190458   0.036254   5.253 1.50e-07 ***
+xmatf.nwaves         0.153400   0.014639  10.479  < 2e-16 ***
+xmatgrade           -0.215242   0.011654 -18.469  < 2e-16 ***
+xmatalterdistress   -0.386185   0.051993  -7.428 1.14e-13 ***
+xmatpsamesexuc      -0.220018   0.059508  -3.697 0.000218 ***
+xmatfreelunch       -0.302921   0.032534  -9.311  < 2e-16 ***
+xmatcms.r            0.129225   0.030482   4.239 2.25e-05 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 2.149 on 27011 degrees of freedom
-  (8008 observations deleted due to missingness)
-Multiple R-squared:  0.7253,	Adjusted R-squared:  0.7252 
-F-statistic:  5944 on 12 and 27011 DF,  p-value: < 2.2e-16
+Residual standard error: 1.999 on 27022 degrees of freedom
+  (7991 observations deleted due to missingness)
+Multiple R-squared:  0.7624,	Adjusted R-squared:  0.7622 
+F-statistic:  4816 on 18 and 27022 DF,  p-value: < 2.2e-16
 
 
 
@@ -82,29 +94,35 @@ lm(formula = y[, m] ~ xmat - 1)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--5.8769 -1.2732  0.0077  1.3576  5.4752 
+-6.2437 -1.1761 -0.0081  1.2159  8.5612 
 
 Coefficients:
-                   Estimate Std. Error t value Pr(>|t|)    
-xmat(Intercept)    4.594040   0.136691  33.609  < 2e-16 ***
-xmatdv.distress   -0.204489   0.027306  -7.489 7.16e-14 ***
-xmatdv.indegc      0.225769   0.005062  44.603  < 2e-16 ***
-xmategodenuc      -0.148610   0.050939  -2.917  0.00353 ** 
-xmatf.female      -0.444854   0.024637 -18.056  < 2e-16 ***
-xmatf.white        0.291851   0.033554   8.698  < 2e-16 ***
-xmatf.nwaves       0.312394   0.013448  23.229  < 2e-16 ***
-xmatgrade         -0.270476   0.010734 -25.199  < 2e-16 ***
-xmatalterdistress -0.275457   0.048253  -5.709 1.15e-08 ***
-xmatpsamesexuc    -0.101459   0.055104  -1.841  0.06560 .  
-xmatfreelunch     -0.177409   0.030150  -5.884 4.04e-09 ***
-xmatcms.r          0.125077   0.028243   4.429 9.52e-06 ***
+                    Estimate Std. Error t value Pr(>|t|)    
+xmat(Intercept)    4.527e+00  1.303e-01  34.746  < 2e-16 ***
+xmatdepress       -2.552e-01  1.300e-01  -1.962 0.049735 *  
+xmatdv.indegc     -5.687e-01  2.496e-02 -22.785  < 2e-16 ***
+xmategodenuc       1.385e+01  2.749e-01  50.390  < 2e-16 ***
+xmat`depress^2`    2.529e-01  2.137e-01   1.184 0.236596    
+xmat`dv.indegc^2`  1.368e-01  5.381e-03  25.416  < 2e-16 ***
+xmat`egodenuc^2`  -3.345e+01  7.949e-01 -42.087  < 2e-16 ***
+xmat`depress^3`   -1.615e-01  8.365e-02  -1.930 0.053609 .  
+xmat`dv.indegc^3` -6.925e-03  3.271e-04 -21.173  < 2e-16 ***
+xmat`egodenuc^3`   1.930e+01  5.698e-01  33.881  < 2e-16 ***
+xmatf.male        -4.530e-01  2.311e-02 -19.602  < 2e-16 ***
+xmatf.white        2.196e-01  3.128e-02   7.019 2.29e-12 ***
+xmatf.nwaves       2.561e-01  1.256e-02  20.379  < 2e-16 ***
+xmatgrade         -2.281e-01  1.003e-02 -22.749  < 2e-16 ***
+xmatalterdistress -2.329e-01  4.488e-02  -5.189 2.13e-07 ***
+xmatpsamesexuc    -1.528e-01  5.138e-02  -2.975 0.002934 ** 
+xmatfreelunch     -1.349e-01  2.811e-02  -4.801 1.59e-06 ***
+xmatcms.r          9.832e-02  2.632e-02   3.736 0.000188 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 1.852 on 27011 degrees of freedom
-  (8008 observations deleted due to missingness)
-Multiple R-squared:  0.7831,	Adjusted R-squared:  0.783 
-F-statistic:  8126 on 12 and 27011 DF,  p-value: < 2.2e-16
+Residual standard error: 1.726 on 27022 degrees of freedom
+  (7991 observations deleted due to missingness)
+Multiple R-squared:  0.8118,	Adjusted R-squared:  0.8117 
+F-statistic:  6475 on 18 and 27022 DF,  p-value: < 2.2e-16
 
 
 
@@ -118,27 +136,33 @@ lm(formula = y[, m] ~ xmat - 1)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.32625 -0.15169 -0.04913  0.09181  0.98650 
+-0.33561 -0.15152 -0.04932  0.08993  0.97930 
 
 Coefficients:
-                    Estimate Std. Error t value Pr(>|t|)    
-xmat(Intercept)   -0.0771494  0.0166561  -4.632 3.64e-06 ***
-xmatdv.distress   -0.0030135  0.0032644  -0.923  0.35595    
-xmatdv.indegc      0.0069701  0.0006249  11.153  < 2e-16 ***
-xmatdv.outdegc    -0.0021197  0.0007266  -2.917  0.00353 ** 
-xmatf.female      -0.0317476  0.0029537 -10.748  < 2e-16 ***
-xmatf.white        0.0192593  0.0040112   4.801 1.58e-06 ***
-xmatf.nwaves       0.0037298  0.0016219   2.300  0.02148 *  
-xmatgrade          0.0153324  0.0012935  11.853  < 2e-16 ***
-xmatalterdistress -0.0288829  0.0057636  -5.011 5.44e-07 ***
-xmatpsamesexuc     0.1550832  0.0065135  23.810  < 2e-16 ***
-xmatfreelunch     -0.0039042  0.0036030  -1.084  0.27855    
-xmatcms.r          0.0108358  0.0033736   3.212  0.00132 ** 
+                     Estimate Std. Error t value Pr(>|t|)    
+xmat(Intercept)    -1.053e-01  1.738e-02  -6.058 1.40e-09 ***
+xmatdepress         1.647e-02  1.662e-02   0.991  0.32171    
+xmatdv.indegc       3.412e-02  3.203e-03  10.653  < 2e-16 ***
+xmatdv.outdegc     -1.437e-02  5.175e-03  -2.777  0.00549 ** 
+xmat`depress^2`    -4.048e-02  2.730e-02  -1.482  0.13823    
+xmat`dv.indegc^2`  -4.185e-03  6.962e-04  -6.011 1.86e-09 ***
+xmat`dv.outdegc^2`  4.739e-03  1.766e-03   2.683  0.00729 ** 
+xmat`depress^3`     1.620e-02  1.069e-02   1.515  0.12972    
+xmat`dv.indegc^3`   1.270e-04  4.218e-05   3.011  0.00261 ** 
+xmat`dv.outdegc^3` -4.424e-04  1.669e-04  -2.651  0.00804 ** 
+xmatf.male         -2.935e-02  2.971e-03  -9.877  < 2e-16 ***
+xmatf.white         1.845e-02  3.999e-03   4.613 3.99e-06 ***
+xmatf.nwaves        3.629e-03  1.618e-03   2.243  0.02490 *  
+xmatgrade           1.511e-02  1.290e-03  11.713  < 2e-16 ***
+xmatalterdistress  -2.775e-02  5.739e-03  -4.836 1.33e-06 ***
+xmatpsamesexuc      1.533e-01  6.492e-03  23.616  < 2e-16 ***
+xmatfreelunch      -2.866e-03  3.594e-03  -0.797  0.42530    
+xmatcms.r           1.005e-02  3.363e-03   2.989  0.00281 ** 
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.2212 on 27011 degrees of freedom
-  (8008 observations deleted due to missingness)
-Multiple R-squared:  0.5505,	Adjusted R-squared:  0.5503 
-F-statistic:  2756 on 12 and 27011 DF,  p-value: < 2.2e-16
+Residual standard error: 0.2205 on 27022 degrees of freedom
+  (7991 observations deleted due to missingness)
+Multiple R-squared:  0.5535,	Adjusted R-squared:  0.5532 
+F-statistic:  1861 on 18 and 27022 DF,  p-value: < 2.2e-16
 

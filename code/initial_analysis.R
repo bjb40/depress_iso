@@ -32,8 +32,8 @@ box_wave =  function(var){
 pdf(paste0(imgdir,'boxplots.pdf'))
 
 #dvs -- boxplots
-print(box_wave('dv.distress'))
-print(box_wave('dv.distress.d'))
+print(box_wave('depress'))
+print(box_wave('depress.d'))
 
 print(box_wave('dv.outdegc'))
 print(box_wave('dv.outdegc.d'))
@@ -45,17 +45,17 @@ dev.off()
 
 #bivariate plots
 #distress, indegc, outdegc scatter plot
-plts = melt(cleandat %>% select(dv.distress,dv.indegc,dv.outdegc),id='dv.distress')
-ggplot(plts, aes(x=dv.distress,y=value,color=variable)) + 
+plts = melt(cleandat %>% select(depress,dv.indegc,dv.outdegc),id='depress')
+ggplot(plts, aes(x=depress,y=value,color=variable)) + 
   geom_jitter(alpha=0.15) + geom_smooth() +
-  xlab('Distress') + ylab('Degrees')
+  xlab('Depression') + ylab('Degrees')
 
 ggsave(paste0(imgdir,'bivariate_dv.pdf'))
 
-plts = melt(cleandat %>% select(dv.distress.d,dv.indegc.d,dv.outdegc.d),id='dv.distress.d')
-ggplot(plts, aes(x=dv.distress.d,y=value,color=variable)) + 
+plts = melt(cleandat %>% select(depress.d,dv.indegc.d,dv.outdegc.d),id='depress.d')
+ggplot(plts, aes(x=depress.d,y=value,color=variable)) + 
   geom_jitter(alpha=0.15) + geom_smooth() +
-  xlab('Distress') + ylab('Degrees')
+  xlab('Depression') + ylab('Degrees')
 
 ggsave(paste0(imgdir,'bivariate_delta_dv.pdf'))
 
@@ -73,7 +73,7 @@ x=cleandat %>% select(f.male,f.white,f.nwaves,grade,
                       alterdistress,psamesexuc,
                       freelunch,cms.r)
 
-y=cleandat %>% select(dv.distress,dv.indegc,dv.outdegc,egodenuc)
+y=cleandat %>% select(depress,dv.indegc,dv.outdegc,egodenuc)
 
 #options(na.action='na.pass')
 #test curvilinear
@@ -84,8 +84,11 @@ for(m in 1:ncol(y))
 {
   printhead(paste0('LM--no cluster or adjustment DV:',colnames(y)[m]))
   cols=1:ncol(y)
+  ymat = y[,!(cols==m)]; cn=colnames(ymat)
+  ymat = cbind(ymat,as.data.frame(apply(ymat,2,function(x) x^2)))
+  colnames(ymat) = c(cn,paste0(cn,'^2'))
   options(na.action='na.pass')
-  xmat = model.matrix(~.,cbind(y[,!(cols==m)],x))
+  xmat = model.matrix(~.,cbind(ymat,x))
   options(na.action='na.omit')
   print(
     summary(lm(y[,m]~xmat-1))
