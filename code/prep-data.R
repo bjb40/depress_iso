@@ -11,7 +11,9 @@ rm(list=ls())
 #libraries
 library(dplyr)
 library(reshape2)
+library(tidyr)
 library(ggplot2)
+
 
 #load directory file and functions
 source("~config.R"); source('funs.R')
@@ -178,7 +180,8 @@ colnames(fobs) = c('f.id',paste0(colnames(fobs)[2:ncol(fobs)],'_iobs'))
 
 #calculate mean, lag and difference
 calcdat = dat %>% 
-  group_by(f.id) %>% 
+  group_by(f.id) %>%
+  mutate(f.nwaves=n()) %>%
   arrange(grade) %>%
   mutate_each(funs(mn=mean(.,na.rm=TRUE), 
                    lag=lag(.,order_by=grade),
@@ -192,5 +195,61 @@ cleandat=merge(calcdat,fobs,by='f.id')
 #data for use
 #@@@@@
 
+#summary stat -- dist of means -- only need calculated...... same as a
+has.deltas = cleandat %>% 
+  group_by(f.id)  %>%
+  summarize_each(funs(sd)) %>% 
+  ungroup %>%   select(-matches('_|^[(f\\.)]|cmty|school')) %>%
+  summarize_each(
+    funs(
+      rnd(1-sum(is.nan(.)/length(.)))
+    )
+  )
 
+
+sink(paste0(outdir,'means.txt'))
+
+indiv.id = unique(cleandat$f.id)
+
+#print summary
+printhead('Data Overview')
+cat(length(indiv.id), 'indoviduals observed for', nrow(cleandat), 'observations.\n')
+cat('Proportion of individuals observed exactly once:',
+    sum(cleandat$f.nwaves==1)/length(indiv.id),'\n')
+
+printhead('Proporiton of Individuals with changes on each variable')
+print(t(has.deltas))
+
+printhead('Means, SD, and range')
+
+
+cleandat %>% summarize_each(funs(max(.,na.rm=TRUE)))
+
+colnames(cleandat) = gsub('_','.',colnames(cleandat))
+
+sumstat = cleandat %>% 
+  ungroup %>% select(-matches('.mn')) %>%
+  summarize_each(funs(
+    mean=rnd(mean(.,na.rm=TRUE)),
+    sd=rnd(sd(.,na.rm=TRUE)),
+    max=rnd(max(.,na.rm=TRUE)),
+    min=rnd(min(.,na.rm=TRUE)),
+    missing=rnd(sum(is.na(.))/n())
+    ))
+
+sumstat.tidy = sumstat %>% 
+  gather(stat,val) %>% 
+  separate(stat, into = c('var','stat'),sep='_') %>%
+  spread(stat,val) %>%
+  select(var,mean,sd,max,min,missing)
+
+print(sumstat.tidy)
+cat('\n\n Note: 
+    .d is difference from individual mean
+    .iobs is initial observation 
+    .lag is lagged observation')
+
+sink()
+
+save(cleandat,file=paste0(outdir,'cleandat~/cleandat.RData'))
 

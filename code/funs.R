@@ -35,4 +35,6 @@ sig = function(pv){
   
 }
 
-
+printhead = function(string){
+  cat('\n\n@@@@@@@@@@@@@@@@\n',string,'\n@@@@@@@@@@@@@@@@\n\n')
+}
