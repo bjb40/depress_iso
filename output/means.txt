@@ -1,0 +1,98 @@
+
+
+@@@@@@@@@@@@@@@@
+ Data Overview 
+@@@@@@@@@@@@@@@@
+
+12700 indoviduals observed for 35031 observations.
+Proportion of individuals observed exactly once: 0.2024409 
+
+
+@@@@@@@@@@@@@@@@
+ Proporiton of Individuals with changes on each variable 
+@@@@@@@@@@@@@@@@
+
+              [,1]   
+dv.distress   "0.790"
+psamesexuc    "0.667"
+emcavgdeprmc  "0.305"
+alterdistress "0.667"
+dv.outdegc    "0.798"
+dv.indegc     "0.798"
+recipc        "0.482"
+egodenuc      "0.516"
+etrnstvtyc    "0.420"
+boncentuc     "0.798"
+grade         "0.798"
+
+
+@@@@@@@@@@@@@@@@
+ Means, SD, and range 
+@@@@@@@@@@@@@@@@
+
+                  var        mean         sd         max         min missing
+1       alterdistress       0.366      0.286       2.000       0.000   0.075
+2     alterdistress.d       0.000      0.180       1.208      -1.337   0.075
+3  alterdistress.iobs       0.377      0.271       2.000       0.000   0.051
+4   alterdistress.lag       0.370      0.274       2.000       0.000   0.393
+5           boncentuc       0.721      0.614       4.542       0.000   0.000
+6         boncentuc.d       0.000      0.331       1.943      -2.298   0.000
+7      boncentuc.iobs       0.792      0.595       3.878       0.000   0.000
+8       boncentuc.lag       0.800      0.613       4.434       0.000   0.363
+9               cms.r       0.760      0.427       1.000       0.000   0.010
+10         cms.r.iobs       0.780      0.414       1.000       0.000   0.010
+11               cmty     169.457     50.311     227.000     111.000   0.000
+12          cmty.iobs     169.457     50.308     227.000     111.000   0.000
+13        dv.distress       0.368      0.448       2.000       0.000   0.004
+14      dv.distress.d      -0.000      0.242       1.450      -1.500   0.004
+15   dv.distress.iobs       0.374      0.441       2.000       0.000   0.003
+16    dv.distress.lag       0.366      0.439       2.000       0.000   0.364
+17          dv.indegc       2.849      2.390      18.000       0.000   0.000
+18        dv.indegc.d      -0.000      1.344       7.000      -9.250   0.000
+19     dv.indegc.iobs       3.393      2.625      18.000       0.000   0.000
+20      dv.indegc.lag       3.222      2.501      18.000       0.000   0.363
+21         dv.outdegc       2.849      2.189       7.000       0.000   0.000
+22       dv.outdegc.d      -0.000      1.311       5.250      -5.250   0.000
+23    dv.outdegc.iobs       3.403      2.241       7.000       0.000   0.000
+24     dv.outdegc.lag       3.228      2.188       7.000       0.000   0.363
+25           egodenuc       0.240      0.226       1.000       0.000   0.178
+26         egodenuc.d      -0.000      0.149       0.750      -0.750   0.178
+27      egodenuc.iobs       0.227      0.202       1.000       0.000   0.119
+28       egodenuc.lag       0.237      0.213       1.000       0.000   0.442
+29       emcavgdeprmc       0.364      0.352       2.000       0.000   0.369
+30     emcavgdeprmc.d      -0.000      0.210       1.333      -1.400   0.370
+31  emcavgdeprmc.iobs       0.381      0.348       2.000       0.000   0.307
+32   emcavgdeprmc.lag       0.369      0.346       2.000       0.000   0.561
+33         etrnstvtyc       0.254      0.241       1.000       0.000   0.249
+34       etrnstvtyc.d      -0.000      0.152       0.611      -0.750   0.249
+35    etrnstvtyc.iobs       0.248      0.220       1.000       0.000   0.177
+36     etrnstvtyc.lag       0.257      0.232       1.000       0.000   0.482
+37           f.cohort       1.495      0.500       2.000       1.000   0.000
+38           f.female       0.482      0.500       1.000       0.000   0.001
+39      f.female.iobs       0.482      0.500       1.000       0.000   0.001
+40               f.id 1696221.363 502949.318 2272261.000 1111001.000   0.000
+41           f.nwaves       3.226      0.943       4.000       1.000   0.000
+42            f.treat       0.473      0.499       1.000       0.000   0.000
+43            f.white       0.840      0.366       1.000       0.000   0.024
+44          freelunch       0.223      0.416       1.000       0.000   0.033
+45     freelunch.iobs       0.235      0.424       1.000       0.000   0.031
+46              grade      10.356      1.110      12.000       9.000   0.000
+47            grade.d       0.000      0.996       1.667      -1.667   0.000
+48         grade.iobs       9.171      0.518      12.000       9.000   0.000
+49          grade.lag       9.861      0.799      11.000       9.000   0.363
+50         psamesexuc       0.856      0.232       1.000       0.000   0.076
+51       psamesexuc.d      -0.000      0.138       0.750      -0.667   0.076
+52    psamesexuc.iobs       0.872      0.209       1.000       0.000   0.051
+53     psamesexuc.lag       0.866      0.214       1.000       0.000   0.393
+54             recipc       0.507      0.356       1.000       0.000   0.201
+55           recipc.d      -0.000      0.224       0.750      -0.750   0.201
+56        recipc.iobs       0.503      0.342       1.000       0.000   0.148
+57         recipc.lag       0.514      0.347       1.000       0.000   0.459
+58             school     324.293     29.859     361.000     252.000   0.000
+59        school.iobs     317.978     32.127     361.000     252.000   0.000
+
+
+ Note: 
+    .d is difference from individual mean
+    .iobs is initial observation 
+    .lag is lagged observation
