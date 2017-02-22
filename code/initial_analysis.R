@@ -14,6 +14,8 @@ library(reshape2)
 library(tidyr)
 library(ggplot2)
 library(gridExtra)
+library(lme4) #random effects mixed models
+library(plm) #individual fixed effects, panel models
 
 #load directory file and functions
 source("~config.R"); source('funs.R')
@@ -71,9 +73,9 @@ ggsave(paste0(imgdir,'bivariate_degrees_dv.pdf'))
 
 x=cleandat %>% select(f.male,f.white,f.nwaves,grade,
                       alterdistress,psamesexuc,
-                      freelunch,cms.r)
+                      freelunch,cms.r,grade,egodenuc)
 
-y=cleandat %>% select(depress,dv.indegc,dv.outdegc,egodenuc)
+y=cleandat %>% select(depress,dv.indegc,dv.outdegc)
 
 #options(na.action='na.pass')
 #test curvilinear
@@ -85,10 +87,12 @@ for(m in 1:ncol(y))
   printhead(paste0('LM--no cluster or adjustment DV:',colnames(y)[m]))
   cols=1:ncol(y)
   ymat = y[,!(cols==m)]; cn=colnames(ymat)
-  ymat = cbind(ymat,as.data.frame(apply(ymat,2,function(x) x^2)))
+  ymat = cbind(ymat,
+               as.data.frame(apply(ymat,2,function(x) x^2))
+               )
   colnames(ymat) = c(cn,paste0(cn,'^2'))
   options(na.action='na.pass')
-  xmat = model.matrix(~.,cbind(ymat,x))
+  xmat = model.matrix(~egodenuc*alterdistress + .,cbind(ymat,x))
   options(na.action='na.omit')
   print(
     summary(lm(y[,m]~xmat-1))
@@ -96,8 +100,67 @@ for(m in 1:ncol(y))
 }
 
 
-#options(na.action='na.omit')
+sink()
+
+sink(paste0(outdir,'fe-analyze.txt'))
 
 
+fe1=plm(depress~dv.indegc+dv.outdegc+egodenuc+alterdistress+alterdistress*egodenuc+
+       psamesexuc+freelunch+cms.r+grade,index='f.id',model='within',data=cleandat)
+printhead("Depress-DV")
+print(summary(fe1))
+
+fe2=plm(dv.indegc~depress+dv.outdegc+egodenuc+alterdistress+alterdistress*egodenuc+
+          psamesexuc+freelunch+cms.r+grade,index='f.id',model='within',data=cleandat)
+printhead("Indegree-DV")
+print(summary(fe2))
+
+fe3=plm(dv.outdegc~depress+dv.indegc+egodenuc+alterdistress+alterdistress*egodenuc+
+          psamesexuc+freelunch+cms.r+grade,index='f.id',model='within',data=cleandat)
+printhead("Outdegree-DV")
+print(summary(fe3))
+sink()
+
+sink(paste0('Growth Curves with Random Slopes (Grade) and Intercepts'))
+
+m1=lmer(depress~dv.indegc+dv.outdegc+egodenuc+alterdistress+alterdistress*egodenuc+
+       psamesexuc+freelunch+cms.r+grade+f.male+f.white+f.treat+f.nwaves+
+       (grade | f.id),data=cleandat)
+printhead("Depress-DV")
+print(summary(m1))
+
+m2=lmer(dv.indegc~depress+dv.outdegc+egodenuc+alterdistress+alterdistress*egodenuc+
+          psamesexuc+freelunch+cms.r+grade+f.male+f.white+f.treat+f.nwaves+
+          (grade | f.id),data=cleandat)
+printhead("Indegree-DV")
+print(summary(m2))
+
+m3=lmer(dv.outdegc~depress+dv.indegc+egodenuc+alterdistress+alterdistress*egodenuc+
+          psamesexuc+freelunch+cms.r+grade+f.male+f.white+f.treat+f.nwaves+
+          (grade | f.id),data=cleandat)
+printhead("Outdegree-DV")
+print(summary(m3))
+
+
+"
+for(m in 1:ncol(y))
+{
+  printhead(paste0('LM--no cluster or adjustment DV:',colnames(y)[m]))
+  cols=1:ncol(y)
+  ilev=factor(cleandat$f.id)
+  ymat = y[,!(cols==m)]; cn=colnames(ymat)
+  ymat = cbind(ymat,
+               as.data.frame(apply(ymat,2,function(x) x^2))
+  )
+  colnames(ymat) = c(cn,paste0(cn,'^2'))
+  options(na.action='na.pass')
+  #xmat = model.matrix(~egodenuc*alterdistress + .,cbind(ymat,x))
+  xmat = model.matrix(~ .,cbind(ymat,x,ilev))
+  options(na.action='na.omit')
+  print(
+    summary(lm(y[,m]~xmat-1))
+  )
+}
+"
 
 sink()

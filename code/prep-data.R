@@ -270,7 +270,8 @@ cat('\n\n Note:
     .iobs is initial observation 
     .lag is lagged observation')
 
-sink()
 
 save(cleandat,file=paste0(outdir,'cleandat~/cleandat.RData'))
 
+#output .csv for stata
+write.csv(cleandat,file=paste0(outdir,'cleandat~/cleandat.csv'),na='.')
