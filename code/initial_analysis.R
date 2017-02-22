@@ -119,9 +119,14 @@ fe3=plm(dv.outdegc~depress+dv.indegc+egodenuc+alterdistress+alterdistress*egoden
           psamesexuc+freelunch+cms.r+grade,index='f.id',model='within',data=cleandat)
 printhead("Outdegree-DV")
 print(summary(fe3))
+
+fe4=plm(egodenuc~dv.outdegc+depress+dv.indegc+alterdistress+
+          psamesexuc+freelunch+cms.r+grade,index='f.id',model='within',data=cleandat)
+printhead("Density-DV")
+print(summary(fe4))
 sink()
 
-sink(paste0('Growth Curves with Random Slopes (Grade) and Intercepts'))
+sink(paste0(outdir,'growth_curve-analysis.txt'))
 
 m1=lmer(depress~dv.indegc+dv.outdegc+egodenuc+alterdistress+alterdistress*egodenuc+
        psamesexuc+freelunch+cms.r+grade+f.male+f.white+f.treat+f.nwaves+
@@ -141,6 +146,14 @@ m3=lmer(dv.outdegc~depress+dv.indegc+egodenuc+alterdistress+alterdistress*egoden
 printhead("Outdegree-DV")
 print(summary(m3))
 
+m4=lmer(egodenuc ~ dv.outdegc~depress+dv.indegc+alterdistress+
+          psamesexuc+freelunch+cms.r+grade+f.male+f.white+f.treat+f.nwaves+
+          (grade | f.id),data=cleandat)
+printhead("Density-DV")
+print(summary(m4))
+
+
+sink()
 
 "
 for(m in 1:ncol(y))
@@ -163,4 +176,3 @@ for(m in 1:ncol(y))
 }
 "
 
-sink()

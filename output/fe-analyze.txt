@@ -112,3 +112,40 @@ Residual Sum of Squares: 36831
 R-Squared      :  0.13471 
       Adj. R-Squared :  0.080737 
 F-statistic: 286.006 on 9 and 16534 DF, p-value: < 2.22e-16
+
+
+@@@@@@@@@@@@@@@@
+ Density-DV 
+@@@@@@@@@@@@@@@@
+
+Oneway (individual) effect Within Model
+
+Call:
+plm(formula = egodenuc ~ dv.outdegc + depress + dv.indegc + alterdistress + 
+    psamesexuc + freelunch + cms.r + grade, data = cleandat, 
+    model = "within", index = "f.id")
+
+Unbalanced Panel: n=11044, T=1-4, N=27587
+
+Residuals :
+   Min. 1st Qu.  Median 3rd Qu.    Max. 
+-0.7580 -0.0735  0.0000  0.0618  0.8290 
+
+Coefficients :
+                 Estimate  Std. Error t-value  Pr(>|t|)    
+dv.outdegc    -0.00574668  0.00097949 -5.8670 4.522e-09 ***
+depress        0.00542118  0.00503993  1.0756    0.2821    
+dv.indegc     -0.00086044  0.00091390 -0.9415    0.3465    
+alterdistress -0.01455320  0.00758979 -1.9175    0.0552 .  
+psamesexuc     0.14055075  0.00975372 14.4100 < 2.2e-16 ***
+freelunch      0.00020660  0.00648763  0.0318    0.9746    
+cms.r          0.00137806  0.00757504  0.1819    0.8556    
+grade          0.00774892  0.00130293  5.9473 2.781e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    596.62
+Residual Sum of Squares: 585.51
+R-Squared      :  0.018625 
+      Adj. R-Squared :  0.011164 
+F-statistic: 39.2268 on 8 and 16535 DF, p-value: < 2.22e-16
