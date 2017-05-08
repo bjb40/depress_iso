@@ -1,0 +1,122 @@
+TITLE: m1 Full ALT with unconstrained cross-lags D=cigs, IIS;
+
+DATA:
+FILE="H:/projects/mh_isolation/cleanlong.dat";
+
+VARIABLE:
+NAMES =     cig mncig cig0 ciglag
+            cms mncms cms0 
+            cmty
+            cohort
+            treat mntreat treat0 !all the same - use mntreat for consistency
+            lun mnlun lun0
+            white 
+            dupwave fobs 
+            hs mnhs hs0
+            id
+            iis mniis iis0 iislag
+            ois mnois ois0 oislag
+            out mnout out0 outlag
+            fe
+            wave mnwave wave0
+            ; 
+
+missing are all .; 
+
+categorical are  cig iis;
+                 
+  
+usevariables are
+                 !cluster
+                 id cmty 
+                 !dv 
+                 cig iis
+                 !tinvar covariates
+                 cohort 
+                 fe white mntreat           
+                 !first obs
+                 cig0 iis0 hs0 
+                 !tvar covariates
+                 wave
+                 !tvar covariates mean
+                 mnwave mnhs
+                 !lagged obs
+                 ciglag iislag 
+                 hs hsxwave hsxciglag hsxiislag            
+                 ;
+
+
+STRATIFICATION = cmty;
+CLUSTER =  id;
+WITHIN=wave ciglag iislag hs hsxwave hsxciglag hsxiislag;
+BETWEEN=cig0 iis0 hs0 
+        mnwave mnhs mntreat fe white cohort
+        ;
+
+DEFINE:
+    wave = wave-1; !center on 6th grade
+    mnwave = mnwave-1;
+    wave0 = wave-1;
+
+    !interacations
+    hsxwave = hs*wave;
+    hsxiislag = hs*iislag;
+    hsxciglag = hs*ciglag;
+
+
+ANALYSIS:
+processors=2;
+TYPE=TWOLEVEL RANDOM COMPLEX;
+ESTIMATOR=MLR;
+
+!special convegence issues
+!algorithm=integration; 
+integration=montecarlo;
+INTERACTIVE=interact.dat;
+!MCONVERGENCE=.01;
+!RLOGCRITERION=.00005;
+!LOGCRITERION=.5;
+!H1CONVERGENCE=.001;
+MITERATIONS=1;
+STARTS=0;
+
+!parameterization=theta; not allowed
+!PARAMETERIZATION=RESCOV; !not available with 2 level...
+
+MODEL:
+!see example 9.16
+
+%WITHIN%
+
+cig iis on wave;
+cig iis on hsxwave;
+cig on hs;
+
+cig iis on ciglag iislag;
+cig iis on hsxciglag hsxiislag;
+
+!variances for complete data analysis;
+! HS and Wave have no missing
+ciglag iislag hsxiislag hsxciglag;
+
+%BETWEEN%
+
+cig iis on fe white cohort mntreat;
+cig iis on mnwave hs0 mnhs;
+cig iis pon cig0 iis0;
+
+cig with iis;
+
+!vars for complete data anlaysis; wave,hs,treat no miss
+fe white cig0 iis0;
+
+OUTPUT: tech1 tech2 tech3 tech8;
+
+SAVEDATA:
+    !sigbetween IS sigma.dat;
+    !swmatrix IS sw.dat;
+    results are results.dat;
+    !cov of paramater ests - for predprob
+    tech3 is tech3.dat; 
+
+  

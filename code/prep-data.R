@@ -275,3 +275,42 @@ save(cleandat,file=paste0(outdir,'cleandat~/cleandat.RData'))
 
 #output .csv for stata
 write.csv(cleandat,file=paste0(outdir,'cleandat~/cleandat.csv'),na='.')
+
+
+#@@@@@@
+#output for analysis in mplus
+#@@@@@@
+
+mpdir = "H:/projects/depress_iso/code/mplus/"
+#select dat for mplus
+mpdat = cleandat %>%
+  select(dv.distress,dv.distress.lag,dv.distress.iobs,
+         dv.indegc,dv.indegc.lag,dv.indegc.iobs,
+         dv.outdegc,dv.outdegc.lag,dv.outdegc.iobs,
+         depress,depress.lag,depress.iobs,
+         grade,grade.mn,grade.iobs,
+         cms.r,cms.r.iobs,freelunch,freelunch.iobs,
+         f.id,f.cohort,cmty,f.treat,f.male,f.white,school,
+         psamesexuc,psamesexuc.iobs,psamesexuc.mn,
+         alterdistress,alterdistress.iobs,alterdistress.mn)
+  
+outdat = as.matrix(mpdat[,sort(colnames(mpdat))])
+rm(mpdat)
+
+write.table(outdat, 
+            file=paste0(mpdir,"mplus_long~.dat"), 
+            na=".",
+            sep="     ",
+            col.names=F,
+            row.names=F
+)
+
+sink(paste0(mpdir,'mplus_long_vars.txt'))
+cat('\nColumn names for mplus_long~.dat\n\n')
+cat(t(colnames(outdat)),sep='\n')
+sink()
+
+rm(outdat)
+
+
+

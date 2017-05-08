@@ -43,7 +43,7 @@ recipc
 #reciprocal ties
 
 egondenuc
-#density --- out of all connections could be connected ; friends are friends
+#density --- out of all connections could be connected ; friends are friends --- use it as a control
 
 ertnstvtyc
 #likelihood a fof is a friend of each other

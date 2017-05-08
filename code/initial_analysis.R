@@ -146,7 +146,7 @@ m3=lmer(dv.outdegc~depress+dv.indegc+egodenuc+alterdistress+alterdistress*egoden
 printhead("Outdegree-DV")
 print(summary(m3))
 
-m4=lmer(egodenuc ~ dv.outdegc~depress+dv.indegc+alterdistress+
+m4=lmer(egodenuc ~ dv.outdegc+depress+dv.indegc+alterdistress+
           psamesexuc+freelunch+cms.r+grade+f.male+f.white+f.treat+f.nwaves+
           (grade | f.id),data=cleandat)
 printhead("Density-DV")

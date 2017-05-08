@@ -1,0 +1,23 @@
+check this out:
+curvilenear relationship (be careful of the top-coded Outdegreee [tobit??])
+
+[[MPLUS??? OR STAN]]
+
+3 dimensions
+in/out/depression OR distress
+
+controls (fixed)
+race
+gender
+treatment
+clustered standard errors by school
+
+controls (tv)
+free lunch
+parents
+
+[network tv]
+samesex
+alterdistress
+[density? --- think about colinearity issues/what is the definition]
+
