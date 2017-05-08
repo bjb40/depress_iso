@@ -1,71 +1,62 @@
-TITLE: m1 Full ALT with unconstrained cross-lags D=cigs, IIS;
+TITLE: m1 Full ALT with unconstrained cross-lags and distress;
 
 DATA:
-FILE="H:/projects/mh_isolation/cleanlong.dat";
+FILE="mplus_long~.dat";
 
 VARIABLE:
-NAMES =     cig mncig cig0 ciglag
-            cms mncms cms0 
-            cmty
-            cohort
-            treat mntreat treat0 !all the same - use mntreat for consistency
-            lun mnlun lun0
-            white 
-            dupwave fobs 
-            hs mnhs hs0
-            id
-            iis mniis iis0 iislag
-            ois mnois ois0 oislag
-            out mnout out0 outlag
-            fe
-            wave mnwave wave0
+NAMES =     altd altd0 altdmn,
+      	    cms,cms0,
+	    cmty,
+	    dep,dep0,deplag,
+	    dis,dis0,dislag,
+	    in,in0,inlag,
+	    out,out0,outlag,
+	    cohort,id,male,treat,white,
+	    flun,flun0,
+	    grd,grd0,grdmn,
+	    ss,ss0,ssmn,
+	    school
             ; 
 
 missing are all .; 
 
-categorical are  cig iis;
+!categorical are  cig iis;
                  
   
 usevariables are
                  !cluster
                  id cmty 
                  !dv 
-                 cig iis
+                 in out dis
                  !tinvar covariates
                  cohort 
-                 fe white mntreat           
+                 male white treat           
                  !first obs
-                 cig0 iis0 hs0 
+                 in0 out0 dis0
                  !tvar covariates
-                 wave
+                 grd flun cms
+		 ss altd
                  !tvar covariates mean
-                 mnwave mnhs
+                 grdmn ssmn altdmn
                  !lagged obs
-                 ciglag iislag 
-                 hs hsxwave hsxciglag hsxiislag            
+                 dislag inlag outlag
                  ;
 
 
 STRATIFICATION = cmty;
 CLUSTER =  id;
-WITHIN=wave ciglag iislag hs hsxwave hsxciglag hsxiislag;
-BETWEEN=cig0 iis0 hs0 
-        mnwave mnhs mntreat fe white cohort
+WITHIN=grd ss altd flun cms dislag inlag outlag;
+BETWEEN=in0 out0 dis0 
+        grdmn altdmn ssmn male white cohort treat
         ;
 
 DEFINE:
-    wave = wave-1; !center on 6th grade
-    mnwave = mnwave-1;
-    wave0 = wave-1;
-
-    !interacations
-    hsxwave = hs*wave;
-    hsxiislag = hs*iislag;
-    hsxciglag = hs*ciglag;
+    grd = grd-9; !center on 9th grade
+    grdmn = grdmn-9;
 
 
 ANALYSIS:
-processors=2;
+processors=4;
 TYPE=TWOLEVEL RANDOM COMPLEX;
 ESTIMATOR=MLR;
 
@@ -77,8 +68,8 @@ INTERACTIVE=interact.dat;
 !RLOGCRITERION=.00005;
 !LOGCRITERION=.5;
 !H1CONVERGENCE=.001;
-MITERATIONS=1;
-STARTS=0;
+!MITERATIONS=1;
+!STARTS=0;
 
 !parameterization=theta; not allowed
 !PARAMETERIZATION=RESCOV; !not available with 2 level...
@@ -87,28 +78,23 @@ MODEL:
 !see example 9.16
 
 %WITHIN%
-
-cig iis on wave;
-cig iis on hsxwave;
-cig on hs;
-
-cig iis on ciglag iislag;
-cig iis on hsxciglag hsxiislag;
+in out dis on grd altd ss flun cms;
+in out dis on inlag outlag dislag;
 
 !variances for complete data analysis;
-! HS and Wave have no missing
-ciglag iislag hsxiislag hsxciglag;
+inlag outlag dislag;
 
 %BETWEEN%
+in out dis on male white cohort treat;
+in out dis on ssmn altdmn grdmn;
+in out dis pon in0 out0 dis0;
 
-cig iis on fe white cohort mntreat;
-cig iis on mnwave hs0 mnhs;
-cig iis pon cig0 iis0;
-
-cig with iis;
+in with out;
+in with dis;
+dis with out;
 
 !vars for complete data anlaysis; wave,hs,treat no miss
-fe white cig0 iis0;
+!fe white cig0 iis0;
 
 OUTPUT: tech1 tech2 tech3 tech8;
 

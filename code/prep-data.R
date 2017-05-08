@@ -283,7 +283,24 @@ write.csv(cleandat,file=paste0(outdir,'cleandat~/cleandat.csv'),na='.')
 
 mpdir = "H:/projects/depress_iso/code/mplus/"
 #select dat for mplus
+
+cohort.switch = cleandat %>%
+  group_by(f.id) %>%
+  summarize(mn.cohort = mean(f.cohort),
+            mn.treat = mean(f.treat)) %>%
+  mutate(cohort.switch=ifelse(mn.cohort>1 & mn.cohort<2,1,0),
+         treat.switch=ifelse(mn.treat>0 & mn.treat<1,1,0)) %>%
+  select(treat.switch,cohort.switch,f.id) %>% ungroup
+
+cleandat = merge(cleandat,cohort.switch,by='f.id')
+
+cat('drop',
+sum(!(cleandat$cohort.switch == 0 & cleandat$treat.switch==0)),
+'for switching across contexts'
+)
+
 mpdat = cleandat %>%
+  filter(cohort.switch==0 & treat.switch==0) %>%
   select(dv.distress,dv.distress.lag,dv.distress.iobs,
          dv.indegc,dv.indegc.lag,dv.indegc.iobs,
          dv.outdegc,dv.outdegc.lag,dv.outdegc.iobs,
